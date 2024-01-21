@@ -21,6 +21,7 @@ namespace UserManagement_CodeWithSL.Controllers
 
 
         }
+
 		[HttpGet]
 		public IActionResult Register()
 		{
@@ -158,7 +159,54 @@ namespace UserManagement_CodeWithSL.Controllers
 
         }
 
-		public async Task<IActionResult> Logout()
+		[HttpGet]
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+        [HttpGet]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+			if (!ModelState.IsValid)
+			{
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    //send email forgot password
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var link = Url.Action("ConfirmEmail", "Action", new { user.Email, token, Request.Scheme });
+                    var body = @$"Hi{user.FirstName}{user.LastName},
+						please, click the link <a href='{link}'>here</a> to reset your password";
+
+                    await _emailService.sendEmailAsync(user.Email, "Forgot Password", body);
+
+					ViewBag.Message = "Reset password has been sent to your email";
+					return View();
+                }
+                ModelState.AddModelError("", "Invalid Email");
+            }
+            return View(model);
+
+        }
+		[HttpGet]
+		public IActionResult PasswordReset( string email, string token)
+		{
+			var resetPasswordModel = new ResetPasswordViewModel{ Email = email, Token = token};
+
+            return View(resetPasswordModel);
+		}
+
+		[HttpPost]
+		public IActionResult ResetPassword(ResetPasswordViewModel model)
+		{
+			
+			{
+				return View();
+			}
+		}
+
+        public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
 

@@ -198,13 +198,33 @@ namespace UserManagement_CodeWithSL.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult ResetPassword(ResetPasswordViewModel model)
+		public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
 		{
-			
+			if(ModelState.IsValid)
 			{
-				return View();
-			}
-		}
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    var resetPasswordResult = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+					if (resetPasswordResult.Succeeded)
+					{
+						return RedirectToAction("Index", "Account");
+					}
+					else
+					{
+						foreach(var error  in resetPasswordResult.Errors)
+						{
+							ModelState.AddModelError(error.Code, error.Description);
+						}
+						return View(model) ;
+					}
+                }
+				ModelState.AddModelError("", "Invalid Email");
+            }
+            return View(model);
+
+        }
 
         public async Task<IActionResult> Logout()
 		{

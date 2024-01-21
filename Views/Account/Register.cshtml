@@ -1,0 +1,29 @@
+﻿@model UserToRegisterViewModel
+@{
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="auth-panel">
+            <div class="auth-panel-inner">
+                <div style="height:100px;" class="flex-btw">
+                    <h2>Register here...</h2>
+                    <div><a asp-action="Index" asp-controller="home">back to Home</a></div>
+                </div>
+                <div asp-validation-summary="All"></div>
+                <form method="post" asp-action="Register" asp-controller="Account">
+                    <p><input asp-for="FirstName" placeholder="First Name" autocomplete="off" /> </p>
+                    <p><input asp-for="LastName" placeholder="Last Name" autocomplete="off" /> </p>
+                    <p><input asp-for="Email" placeholder="Email" autocomplete="off"/> </p>
+                    <p><input asp-for="PhoneNumber" placeholder="Phone Number" autocomplete="off"/> </p>
+                    <p><input asp-for="Password" placeholder="Password" autocomplete="off"/> </p>
+                    <p><input asp-for="PasswordConfirm" placeholder="Confirm Password" autocomplete=""/> </p>
+                    <button type="submit" class="btn btn-primary">Enter</button>
+                </form>
+                <p>
+                    Have an account? <a asp-action="Login" asp-controller="Account">Login here</a>
+                </p>
+            </div>
+        </div>
+    </main>
+</div>

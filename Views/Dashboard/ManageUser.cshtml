@@ -1,0 +1,28 @@
+﻿@model List<UserToReturnViewModel>
+@{
+}
+
+<h2>All Users</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th> <th>Email</th> <th>Role</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var user in Model)
+		{
+			<tr>
+				<td>@user.FirstName @user.LastName</td>
+				<td>@user.Email</td>
+				<td>@user.Role</td>
+				<td>
+					<a asp-action="" asp-controller="">View  |</a>
+					<a asp-action="" asp-controller="">Edit  |</a>
+					<a asp-action="" asp-controller="">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

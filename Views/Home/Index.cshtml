@@ -1,0 +1,27 @@
+﻿@model List<UserToReturnViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+    ViewBag.IsLoggedOut = true;
+}
+<partial name="_NavbarPartial" />
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="my_card_panel">
+            @foreach(var user in Model)
+            {
+                <a href="#">
+                    <div class="my_card">
+                        <div class="my_card_image_box">
+                            <img src="@user.PhotoUrl" />
+                        </div>
+                        <div class="my_card_desc">
+                            <p>@user.FirstName @user.LastName</p>
+                            <p>Email @user.Email</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </main>
+</div>

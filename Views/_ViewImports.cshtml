@@ -1,0 +1,11 @@
+﻿@using UserManagement_CodeWithSL
+@using UserManagement_CodeWithSL.Models
+@using UserManagement_CodeWithSL.Models.ViewModel
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using Microsoft.AspNetCore.Identity
+@using UserManagement_CodeWithSL.Models.Entities
+@inject SignInManager<AppUser> _signinMgr
+@inject UserManager<AppUser> _userMgr
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

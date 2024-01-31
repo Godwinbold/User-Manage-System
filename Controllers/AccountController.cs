@@ -175,7 +175,7 @@ namespace UserManagement_CodeWithSL.Controllers
                 {
                     //send email forgot password
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var link = Url.Action("ConfirmEmail", "Action", new { user.Email, token, Request.Scheme });
+                    var link = Url.Action("Reset Password", "Action", new { user.Email, token, Request.Scheme });
                     var body = @$"Hi{user.FirstName}{user.LastName},
 						please, click the link <a href='{link}'>here</a> to reset your password";
 

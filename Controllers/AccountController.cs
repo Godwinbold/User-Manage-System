@@ -19,7 +19,6 @@ namespace UserManagement_CodeWithSL.Controllers
 			_emailService = emailService;
             _signInManager = signInManager;
 
-
         }
 
 		[HttpGet]
